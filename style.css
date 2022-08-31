@@ -1,0 +1,23 @@
+.color {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border: solid 1px black;
+}
+
+#cor1 {
+    background-color: rebeccapurple;
+}
+
+#cor2 {
+    background-color: black;
+}
+
+#cor3 {
+    background-color: royalblue;
+}
+
+#cor4 {
+    background-color: brown;
+}
+
