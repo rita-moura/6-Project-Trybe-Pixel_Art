@@ -1,11 +1,15 @@
-const localizacaoPaleta = document.querySelector("#color-palette");
-function gerarPaletaDeCores() {
+function creatElement(element, text, attribute, value) {
+  const newElement = document.createElement(element);
+  newElement.innerText = text;
+  newElement.setAttribute(attribute, value);
+  return newElement;
+}
+
+function creatPalleteColors() {
+  const addPallete = document.querySelector('#color-palette');
   for (let index = 1; index < 5; index += 1) {
-    const criarPaletaDeCores = document.createElement('div');
-    criarPaletaDeCores.id = 'cor' + index;
-    criarPaletaDeCores.classList.add('color');
-    localizacaoPaleta.appendChild(criarPaletaDeCores);
-    console.log(criarPaletaDeCores);
+    const creatPallete = addPallete.appendChild(creatElement('div', '', 'id', `color${index}`));
+    creatPallete.classList.add('color');
   }
 }
-gerarPaletaDeCores();
+creatPalleteColors();

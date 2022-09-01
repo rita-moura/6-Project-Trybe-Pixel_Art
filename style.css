@@ -5,19 +5,19 @@
   border: solid 1px black;
 }
 
-#cor1 {
-  background-color: rebeccapurple;
-}
-
-#cor2 {
+#color1 {
   background-color: black;
 }
 
-#cor3 {
-  background-color: royalblue;
+#color2 {
+  background-color: rgb(116, 9, 84);
 }
 
-#cor4 {
-  background-color: brown;
+#color3 {
+  background-color: rgb(75, 7, 60);
+}
+
+#color4 {
+  background-color: rgb(49, 4, 49);
 }
 
