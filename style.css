@@ -1,23 +1,11 @@
 .color {
+  border: 1px solid black;
+  width: 60px;
+  height: 60px;
   display: inline-block;
-  height: 100px;
-  width: 100px;
-  border: solid 1px black;
+  margin: 3px;
 }
 
-#color1 {
+#color-0 {
   background-color: black;
 }
-
-#color2 {
-  background-color: rgb(116, 9, 84);
-}
-
-#color3 {
-  background-color: rgb(75, 7, 60);
-}
-
-#color4 {
-  background-color: rgb(49, 4, 49);
-}
-

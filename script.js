@@ -4,12 +4,32 @@ function creatElement(element, text, attribute, value) {
   newElement.setAttribute(attribute, value);
   return newElement;
 }
+creatElement();
 
-function creatPalleteColors() {
-  const addPallete = document.querySelector('#color-palette');
-  for (let index = 1; index < 5; index += 1) {
-    const creatPallete = addPallete.appendChild(creatElement('div', '', 'id', `color${index}`));
-    creatPallete.classList.add('color');
-  }
+const creatH1 = document.querySelector('body');
+creatH1.appendChild(creatElement('h1', 'Paleta de Cores', 'id', 'title'));
+
+const creatSection = document.querySelector('body');
+creatSection.appendChild(creatElement('section', '', 'id', 'color-palette'));
+const addDiv = document.querySelector('section');
+
+for (let index = 0; index < 4; index += 1) {
+  const createDiv = addDiv.appendChild(creatElement('div', null, 'id', `color-${index}`));
+  createDiv.classList.add('color');
 }
-creatPalleteColors();
+
+function buttonColor() {
+  const red = Math.floor(Math.random() * 255);
+  const green = Math.floor(Math.random() * 255);
+  const blue = Math.floor(Math.random() * 255);
+  document.querySelectorAll('.color')[1].style.backgroundColor = `rgb(${green}, ${red}, ${blue})`;
+  document.querySelectorAll('.color')[2].style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
+  document.querySelectorAll('.color')[3].style.backgroundColor = `rgb(${blue}, ${green}, ${red})`;
+}
+window.onload = buttonColor;
+
+const localButton = document.querySelector('body');
+const creatButton = localButton.appendChild(creatElement('button', 'Cores aleatórias', 'id', 'button-random-color'));
+creatButton.style.border = '1px solid black';
+
+creatButton.addEventListener('click', buttonColor);
