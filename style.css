@@ -1,3 +1,7 @@
+#button {
+    padding: 10px 10px;
+}
+
 .color {
   border: 1px solid black;
   width: 60px;
@@ -8,4 +12,12 @@
 
 #color-0 {
   background-color: black;
+}
+
+.pixel {
+  border: 1px solid black;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  margin: 2px;
 }
