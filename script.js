@@ -14,7 +14,7 @@ creatSection.appendChild(creatElement('section', '', 'id', 'color-palette'));
 const addDiv = document.getElementById('color-palette');
 
 const creatSectionButton = document.querySelector('body');
-creatSectionButton.appendChild(creatElement('section', '', 'id', 'button'));
+creatSectionButton.appendChild(creatElement('section', '', 'id', 'section-button'));
 
 const creatGradPixel = document.querySelector('body');
 creatGradPixel.appendChild(creatElement('section', '', 'id', 'pixel-board'));
@@ -28,25 +28,37 @@ for (let index = 0; index < 4; index += 1) {
 const divBlack = document.querySelectorAll('.color')[0];
 divBlack.className = 'color selected';
 
-function palleteColor() {
+function createColor() {
   const red = Math.floor(Math.random() * 255);
   const green = Math.floor(Math.random() * 255);
   const blue = Math.floor(Math.random() * 255);
-  document.querySelectorAll('.color')[1].style.backgroundColor = `rgb(${green}, ${red}, ${blue})`;
-  document.querySelectorAll('.color')[2].style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
-  document.querySelectorAll('.color')[3].style.backgroundColor = `rgb(${blue}, ${green}, ${red})`;
-  localStorage.setItem('colorPalette', `rgb(${green}, ${red}, ${blue})`);
+  return `rgb(${red}, ${green}, ${blue})`;
 }
-window.onload = palleteColor;
 
-const localButton = document.querySelector('#button');
-const creatButton = localButton.appendChild(creatElement('button', 'Cores aleatórias', 'id', 'button-random-color'));
-creatButton.style.border = '1px solid black';
+const colors = document.querySelectorAll('.color');
 
-creatButton.addEventListener('click', palleteColor);
+function alterColor() {
+  for (let index = 1; index < colors.length; index += 1) {
+    colors[index].style.backgroundColor = createColor();
+  }
+  localStorage.setItem('colorPalette', createColor());
+}
+window.onload = alterColor();
+
+/*function savedColor() {
+  const savedColors = document.querySelector('#color-palette');
+  return savedColors.innerHTML;
+}
+
+const searchColor = localStorage.getItem('colorPalette');
+searchColor.innerHTML = savedColor();*/
+
+const localButton = document.querySelector('#section-button');
+localButton.appendChild(creatElement('button', 'Cores aleatórias', 'id', 'button-random-color'));
+const buttonPalleteColor = document.querySelector('#button-random-color');
+buttonPalleteColor.addEventListener('click', alterColor);
 
 for (let index = 0; index < 25; index += 1) {
   const createGrade = addGradPixel.appendChild(creatElement('div', null, 'id', `pixel-${index}`));
   createGrade.classList.add('pixel');
-  createGrade.style.backgroundColor = 'white';
 }

@@ -1,5 +1,5 @@
-#button {
-    padding: 10px 10px;
+#section-button {
+  padding: 10px 10px;
 }
 
 .color {
@@ -14,10 +14,17 @@
   background-color: black;
 }
 
+#pixel-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+
 .pixel {
   border: 1px solid black;
   width: 40px;
   height: 40px;
   display: inline-block;
   margin: 2px;
+  background-color: white;
 }
