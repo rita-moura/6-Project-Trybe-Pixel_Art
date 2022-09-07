@@ -35,23 +35,25 @@ function createColor() {
   return `rgb(${red}, ${green}, ${blue})`;
 }
 
-const colors = document.querySelectorAll('.color');
+const localColor = document.querySelectorAll('.color');
+
+function savedStorage(item) {
+  localStorage.setItem('colorPalette', JSON.stringify(item));
+}
+
+function getStorage() {
+  return JSON.parse(localStorage.getItem('colorPalette'));
+}
 
 function alterColor() {
-  for (let index = 1; index < colors.length; index += 1) {
-    colors[index].style.backgroundColor = createColor();
+  const arrayColor = [];
+  for (let index = 1; index < localColor.length; index += 1) {
+    const savedColor = createColor();
+    localColor[index].style.backgroundColor = savedColor;
+    arrayColor.push(savedColor);
   }
-  localStorage.setItem('colorPalette', createColor());
+  savedStorage(arrayColor);
 }
-window.onload = alterColor();
-
-/*function savedColor() {
-  const savedColors = document.querySelector('#color-palette');
-  return savedColors.innerHTML;
-}
-
-const searchColor = localStorage.getItem('colorPalette');
-searchColor.innerHTML = savedColor();*/
 
 const localButton = document.querySelector('#section-button');
 localButton.appendChild(creatElement('button', 'Cores aleatórias', 'id', 'button-random-color'));
@@ -62,3 +64,24 @@ for (let index = 0; index < 25; index += 1) {
   const createGrade = addGradPixel.appendChild(creatElement('div', null, 'id', `pixel-${index}`));
   createGrade.classList.add('pixel');
 }
+
+function clearPixel() {
+  const localDivPixel = document.querySelectorAll('.pixel');
+  for (let index = 0; index < 25; index += 1) {
+    localDivPixel[index].style.backgroundColor = 'white';
+  }
+}
+const localButtonClear = document.querySelector('#section-button');
+localButtonClear.appendChild(creatElement('button', 'Limpar', 'id', 'clear-board'));
+const buttonClear = document.querySelector('#clear-board');
+buttonClear.addEventListener('click', clearPixel);
+
+window.onload = function funcina() {
+  const colorGet = getStorage();
+  if (colorGet) {
+    const localColorDiv = document.querySelectorAll('.color');
+    for (let index = 1; index < localColorDiv.length; index += 1) {
+      localColorDiv[index].style.backgroundColor = colorGet[index - 1];
+    }
+  }
+};
