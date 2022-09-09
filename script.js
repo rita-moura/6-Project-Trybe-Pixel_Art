@@ -26,6 +26,7 @@ for (let index = 0; index < 4; index += 1) {
 
 const divBlack = document.querySelectorAll('.color')[0];
 divBlack.className = 'color selected';
+divBlack.style.backgroundColor = 'black'
 
 const addGradPixel = document.querySelector('#pixel-board');
 const localColor = document.querySelectorAll('.color');
