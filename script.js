@@ -18,7 +18,6 @@ creatSectionButton.appendChild(creatElement('section', '', 'id', 'section-button
 
 const creatGradPixel = document.querySelector('body');
 creatGradPixel.appendChild(creatElement('section', '', 'id', 'pixel-board'));
-const addGradPixel = document.querySelector('#pixel-board');
 
 for (let index = 0; index < 4; index += 1) {
   const createDiv = addDiv.appendChild(creatElement('div', null, 'id', `color-${index}`));
@@ -28,14 +27,20 @@ for (let index = 0; index < 4; index += 1) {
 const divBlack = document.querySelectorAll('.color')[0];
 divBlack.className = 'color selected';
 
+const addGradPixel = document.querySelector('#pixel-board');
+const localColor = document.querySelectorAll('.color');
+const divColor0 = document.querySelector('#color-0');
+const divColor1 = document.querySelector('#color-1');
+const divColor2 = document.querySelector('#color-2');
+const divColor3 = document.querySelector('#color-3');
+
+
 function createColor() {
   const red = Math.floor(Math.random() * 255);
   const green = Math.floor(Math.random() * 255);
   const blue = Math.floor(Math.random() * 255);
   return `rgb(${red}, ${green}, ${blue})`;
 }
-
-const localColor = document.querySelectorAll('.color');
 
 function savedStorage(item) {
   localStorage.setItem('colorPalette', JSON.stringify(item));
@@ -71,6 +76,18 @@ function clearPixel() {
     localDivPixel[index].style.backgroundColor = 'white';
   }
 }
+
+function changeColorSelected(event) {
+  const techElement = document.querySelector('.selected');
+  techElement.classList.remove('selected');
+  event.target.classList.add('selected');
+}
+
+divColor0.addEventListener('click', changeColorSelected);
+divColor1.addEventListener('click', changeColorSelected);
+divColor2.addEventListener('click', changeColorSelected);
+divColor3.addEventListener('click', changeColorSelected);
+
 const localButtonClear = document.querySelector('#section-button');
 localButtonClear.appendChild(creatElement('button', 'Limpar', 'id', 'clear-board'));
 const buttonClear = document.querySelector('#clear-board');
