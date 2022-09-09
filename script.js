@@ -26,14 +26,17 @@ for (let index = 0; index < 4; index += 1) {
 
 const divBlack = document.querySelectorAll('.color')[0];
 divBlack.className = 'color selected';
-divBlack.style.backgroundColor = 'black'
+divBlack.style.backgroundColor = 'black';
 
 const addGradPixel = document.querySelector('#pixel-board');
 const localColor = document.querySelectorAll('.color');
 const divColor0 = document.querySelector('#color-0');
 const divColor1 = document.querySelector('#color-1');
+divColor1.style.backgroundColor = 'red';
 const divColor2 = document.querySelector('#color-2');
+divColor2.style.backgroundColor = 'blue';
 const divColor3 = document.querySelector('#color-3');
+divColor3.style.backgroundColor = 'pink';
 
 function createColor() {
   const red = Math.floor(Math.random() * 255);
@@ -73,7 +76,7 @@ for (let index = 0; index < 25; index += 1) {
 function clearPixel() {
   const localDivPixel = document.querySelectorAll('.pixel');
   for (let index = 0; index < 25; index += 1) {
-    localDivPixel[index].style.backgroundColor = 'white';
+    localDivPixel[index].style.backgroundColor = 'rgb(255, 255, 255)';
   }
 }
 
