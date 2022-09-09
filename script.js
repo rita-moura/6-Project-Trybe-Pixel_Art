@@ -34,7 +34,6 @@ const divColor1 = document.querySelector('#color-1');
 const divColor2 = document.querySelector('#color-2');
 const divColor3 = document.querySelector('#color-3');
 
-
 function createColor() {
   const red = Math.floor(Math.random() * 255);
   const green = Math.floor(Math.random() * 255);
@@ -78,15 +77,24 @@ function clearPixel() {
 }
 
 function changeColorSelected(event) {
-  const techElement = document.querySelector('.selected');
-  techElement.classList.remove('selected');
+  const getSelected = document.querySelector('.selected');
+  getSelected.classList.remove('selected');
   event.target.classList.add('selected');
 }
-
 divColor0.addEventListener('click', changeColorSelected);
 divColor1.addEventListener('click', changeColorSelected);
 divColor2.addEventListener('click', changeColorSelected);
 divColor3.addEventListener('click', changeColorSelected);
+
+const getPixel = document.querySelectorAll('.pixel');
+function colorPixel(event) {
+  const getSelected = document.querySelector('.selected');
+  event.target.style.backgroundColor = getSelected.style.backgroundColor;
+}
+
+for (let index = 0; index < getPixel.length; index += 1) {
+  getPixel[index].addEventListener('click', colorPixel);
+}
 
 const localButtonClear = document.querySelector('#section-button');
 localButtonClear.appendChild(creatElement('button', 'Limpar', 'id', 'clear-board'));
