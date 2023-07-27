@@ -27,13 +27,11 @@
 }
 
 #pixel-board {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0;
-  width: 0;
-  height: 0;
-  padding: 10px;
-  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 230px;
+  height: 230px;
+  padding: 5px;
 }
 
 .pixel {
