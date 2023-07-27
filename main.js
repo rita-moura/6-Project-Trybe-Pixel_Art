@@ -1,38 +1,14 @@
-function createElement(element, text, attribute, value) {
-  const newElement = document.createElement(element);
-  newElement.innerText = text;
-  newElement.setAttribute(attribute, value);
-  return newElement;
-}
-
-const body = document.querySelector('body');
-
-body.appendChild(createElement('section', '', 'id', 'color-palette'));
-body.appendChild(createElement('button', 'Cores aleatórias', 'id', 'button-random-color'));
-body.appendChild(createElement('section', '', 'id', 'pixel-board'));
-
-for (let index = 0; index < 4; index += 1) {
-  const section = document.querySelector('#color-palette');
-  const createDiv = section.appendChild(createElement('div', '', 'id', `color-${index}`));
-  createDiv.classList.add('color');
-}
-
 const divColor0 = document.querySelector('#color-0');
 const divColor1 = document.querySelector('#color-1');
 const divColor2 = document.querySelector('#color-2');
 const divColor3 = document.querySelector('#color-3');
+const getPixel = document.querySelectorAll('.pixel');
 
 divColor0.className = 'color selected';
 divColor0.style.backgroundColor = 'black';
 divColor1.style.backgroundColor = 'red';
 divColor2.style.backgroundColor = 'blue';
 divColor3.style.backgroundColor = 'pink';
-
-for (let index = 0; index < 25; index += 1) {
-  const addGradPixel = document.querySelector('#pixel-board');
-  const createGrade = addGradPixel.appendChild(createElement('div', '', 'id', `pixel-${index}`));
-  createGrade.classList.add('pixel');
-}
 
 function changeColorSelected(event) {
   const getSelected = document.querySelector('.selected');
@@ -49,11 +25,16 @@ function createColor() {
 
 function colorPixel(event) {
   const getSelected = document.querySelector('.selected');
+  const replacementColor = getSelected.style.backgroundColor;
+
   // eslint-disable-next-line no-param-reassign
-  event.target.style.backgroundColor = getSelected.style.backgroundColor;
+  event.target.style.backgroundColor = replacementColor;
+
+  // Salvar o estado atual do quadro de pixels
+  const currentPixelBoard = Array.from(getPixel).map((pixel) => pixel.style.backgroundColor);
+  localStorage.setItem('pixelBoard', JSON.stringify(currentPixelBoard));
 }
 
-const getPixel = document.querySelectorAll('.pixel');
 for (let index = 0; index < getPixel.length; index += 1) {
   getPixel[index].addEventListener('click', colorPixel);
 }
@@ -77,7 +58,15 @@ function randomColor() {
   savedStorage(arrayColor);
 }
 
-document.getElementById('button-random-color').addEventListener('click', randomColor);
+function clearBoard() {
+  const allPixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < allPixels.length; index += 1) {
+    allPixels[index].style.backgroundColor = 'white';
+  }
+}
+
+document.querySelector('#button-random-color').addEventListener('click', randomColor);
+document.querySelector('#clear-board').addEventListener('click', clearBoard);
 divColor0.addEventListener('click', changeColorSelected);
 divColor1.addEventListener('click', changeColorSelected);
 divColor2.addEventListener('click', changeColorSelected);
@@ -90,5 +79,15 @@ window.onload = () => {
     for (let index = 1; index < localColorDiv.length; index += 1) {
       localColorDiv[index].style.backgroundColor = colorGet[index - 1];
     }
+  }
+
+  // Recuperar o estado do quadro de pixels do localStorage
+  const savedPixelBoard = JSON.parse(localStorage.getItem('pixelBoard'));
+  if (savedPixelBoard) {
+    const pixelArray = Array.from(getPixel);
+    pixelArray.forEach((pixel, index) => {
+      // eslint-disable-next-line no-param-reassign
+      pixel.style.backgroundColor = savedPixelBoard[index];
+    });
   }
 };
