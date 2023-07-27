@@ -49,16 +49,23 @@ function changeColorSelected(event) {
 // }
 
 function verifyInput() {
-  const inputValue = inputPixelBoard.value;
+  let inputValue = inputPixelBoard.value;
   if (inputValue === '') {
     alert('Board inválido!');
   }
+  if (inputValue < 5) {
+    inputValue = 5;
+  }
+  if (inputValue > 50) {
+    inputValue = 50;
+  }
+  return inputValue;
 }
 
 function changePixelBoard() {
   sectionPixelBoard.innerHTML = '';
-  verifyInput();
-  const inputValue = inputPixelBoard.value;
+
+  const inputValue = verifyInput();
 
   const pixelSize = 40;
   sectionPixelBoard.style.width = `${pixelSize * inputValue}px`;
