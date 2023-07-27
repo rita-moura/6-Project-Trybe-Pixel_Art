@@ -76,7 +76,6 @@ function createColor() {
 function colorPixel({ target }) {
   const getSelected = document.querySelector('.selected');
 
-  // eslint-disable-next-line no-param-reassign
   target.style.backgroundColor = getSelected.style.backgroundColor;
 
   const currentPixelBoard = Array.from(getPixel).map((pixel) => pixel.style.backgroundColor);
