@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const divColor0 = document.querySelector('#color-0');
 const divColor1 = document.querySelector('#color-1');
 const divColor2 = document.querySelector('#color-2');
@@ -30,24 +31,6 @@ function changeColorSelected(event) {
   event.target.classList.add('selected');
 }
 
-// function inputMin() {
-//   const inputValue = inputPixelBoard.value;
-//   if (inputValue < 5) {
-//     for (let index = 0; index < 25; index += 1) {
-//       sectionPixelBoard.appendChild(createElement('div', '', 'class', 'pixel'));
-//     }
-//   }
-// }
-
-// function inputMax() {
-//   const inputValue = inputPixelBoard.value;
-//   if (inputValue > 50) {
-//     for (let index = 0; index < 25; index += 1) {
-//       sectionPixelBoard.appendChild(createElement('div', '', 'class', 'pixel'));
-//     }
-//   }
-// }
-
 function verifyInput() {
   let inputValue = inputPixelBoard.value;
   if (inputValue === '') {
@@ -79,6 +62,8 @@ function changePixelBoard() {
       sectionPixelBoard.appendChild(pixel);
     }
   }
+
+  localStorage.setItem('boardSize', inputValue);
 }
 
 function createColor() {
@@ -124,6 +109,15 @@ function clearBoard() {
   }
 }
 
+function getChangePixelBoard() {
+  const savedBoardSize = localStorage.getItem('boardSize');
+
+  if (savedBoardSize) {
+    inputPixelBoard.value = savedBoardSize;
+    changePixelBoard();
+  }
+}
+
 for (let index = 0; index < getPixel.length; index += 1) {
   getPixel[index].addEventListener('click', colorPixel);
 }
@@ -144,13 +138,12 @@ window.onload = () => {
       localColorDiv[index].style.backgroundColor = colorGet[index - 1];
     }
   }
-
   const savedPixelBoard = JSON.parse(localStorage.getItem('pixelBoard'));
   if (savedPixelBoard) {
     const pixelArray = Array.from(getPixel);
     pixelArray.forEach((pixel, index) => {
-      // eslint-disable-next-line no-param-reassign
       pixel.style.backgroundColor = savedPixelBoard[index];
     });
   }
+  getChangePixelBoard();
 };
